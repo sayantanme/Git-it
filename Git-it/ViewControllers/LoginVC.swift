@@ -12,6 +12,8 @@ class LoginVC: UIViewController,Notifier {
 
     @IBOutlet weak var txtUserName: UITextField!
     @IBOutlet weak var btnLogin: UIButton!
+    var user:GitHubUser?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         btnLogin.layer.cornerRadius = 5
@@ -19,6 +21,10 @@ class LoginVC: UIViewController,Notifier {
         txtUserName.becomeFirstResponder()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -28,12 +34,22 @@ class LoginVC: UIViewController,Notifier {
             self.displayAlert(title: "Error", message: "Enter a login")
             return
         }
-        NetworkQueries().getSearchResults(searchTerm: txtUserName.text!) { (gitUser, error) in
+        NetworkQueries().fetchGithubUser(searchTerm: txtUserName.text!) { (gitUser, error) in
             guard error.isEmpty else{
                 self.displayAlert(title: "Error", message: error)
                 return
             }
-            print("something")
+            if let user = gitUser{
+                self.user = user
+                self.performSegue(withIdentifier: "showUserDetails", sender: nil)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is ProfileTVC {
+            let pTVC = segue.destination as! ProfileTVC
+            pTVC.gitUser = user
         }
     }
 }

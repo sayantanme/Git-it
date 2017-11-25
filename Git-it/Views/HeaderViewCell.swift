@@ -10,6 +10,19 @@ import UIKit
 
 class HeaderViewCell: UITableViewCell {
 
+    @IBOutlet weak var imgProfile: UIImageView! = {
+        let imgView = UIImageView()
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        imgView.layer.cornerRadius = 16
+        imgView.layer.masksToBounds = true
+        imgView.contentMode = .scaleAspectFill
+        return imgView
+    }()
+    
+    @IBOutlet weak var followers: UILabel!
+    @IBOutlet weak var publicGists: UILabel!
+    @IBOutlet weak var publicRepos: UILabel!
+    @IBOutlet weak var lblLocation: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

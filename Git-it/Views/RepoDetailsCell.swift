@@ -10,6 +10,8 @@ import UIKit
 
 class RepoDetailsCell: UITableViewCell {
 
+    @IBOutlet weak var descriptionText: UILabel!
+    @IBOutlet weak var detailsText: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
