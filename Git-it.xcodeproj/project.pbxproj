@@ -26,6 +26,7 @@
 		39F6C0561FCA1AAC00D90828 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6C0551FCA1AAC00D90828 /* ShareViewController.swift */; };
 		39F6C0591FCA1AAC00D90828 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39F6C0571FCA1AAC00D90828 /* MainInterface.storyboard */; };
 		39F6C05D1FCA1AAC00D90828 /* LinkShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 39F6C0531FCA1AAC00D90828 /* LinkShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		39F6C0641FCA234200D90828 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6C0631FCA234200D90828 /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		39F6C0581FCA1AAC00D90828 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		39F6C05A1FCA1AAC00D90828 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		39F6C0621FCA1B8C00D90828 /* LinkShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LinkShareExtension.entitlements; sourceTree = "<group>"; };
+		39F6C0631FCA234200D90828 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 		39F6C00A1FC845B800D90828 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				39F6C0631FCA234200D90828 /* Reachability.swift */,
 				39F6C00B1FC845ED00D90828 /* NetworkQueries.swift */,
 			);
 			path = Networking;
@@ -327,6 +330,7 @@
 				39F6C0171FC8799300D90828 /* ProfileTVC.swift in Sources */,
 				39F6BFF81FC8363A00D90828 /* AppDelegate.swift in Sources */,
 				39F6C00C1FC845ED00D90828 /* NetworkQueries.swift in Sources */,
+				39F6C0641FCA234200D90828 /* Reachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
