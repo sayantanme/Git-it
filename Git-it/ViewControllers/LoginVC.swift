@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginVC: UIViewController,Notifier {
-
+    
     @IBOutlet weak var txtUserName: UITextField!
     @IBOutlet weak var btnLogin: UIButton!
     var user:GitHubUser?
@@ -20,7 +20,7 @@ class LoginVC: UIViewController,Notifier {
         btnLogin.layer.borderWidth = 1
         txtUserName.becomeFirstResponder()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -28,21 +28,30 @@ class LoginVC: UIViewController,Notifier {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     @IBAction func btnGetStarted(_ sender: UIButton) {
         guard !(txtUserName.text?.isEmpty)! else {
             self.displayAlert(title: "Error", message: "Enter a login")
             return
         }
-        NetworkQueries().fetchGithubUser(searchTerm: txtUserName.text!) { (gitUser, error) in
-            guard error.isEmpty else{
-                self.displayAlert(title: "Error", message: error)
-                return
+        
+        let gitHubUser = CoreDataDA().getGitUser(username: txtUserName.text!, appDelegate: UIApplication.shared.delegate as! AppDelegate)
+        
+        if gitHubUser == nil{
+            NetworkQueries().fetchGithubUser(searchTerm: txtUserName.text!) { (gitUser, error) in
+                guard error.isEmpty else{
+                    self.displayAlert(title: "Error", message: error)
+                    return
+                }
+                if let user = gitUser{
+                    self.user = user
+                    CoreDataDA().save(gitUser: user, appDelegate: UIApplication.shared.delegate as! AppDelegate)
+                    self.performSegue(withIdentifier: "showUserDetails", sender: nil)
+                }
             }
-            if let user = gitUser{
-                self.user = user
-                self.performSegue(withIdentifier: "showUserDetails", sender: nil)
-            }
+        }else{
+            self.user = gitHubUser
+            performSegue(withIdentifier: "showUserDetails", sender: nil)
         }
     }
     

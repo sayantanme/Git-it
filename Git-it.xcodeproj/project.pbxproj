@@ -21,6 +21,8 @@
 		39F6C0201FC9359600D90828 /* RepoDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6C01F1FC9359600D90828 /* RepoDetailsCell.swift */; };
 		39F6C0231FC9C53C00D90828 /* HeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6C0211FC9C53C00D90828 /* HeaderViewCell.swift */; };
 		39F6C0241FC9C53C00D90828 /* HeaderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39F6C0221FC9C53C00D90828 /* HeaderViewCell.xib */; };
+		39F6C04B1FC9E46500D90828 /* Git-it.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 39F6C0491FC9E46500D90828 /* Git-it.xcdatamodeld */; };
+		39F6C04E1FC9E7EF00D90828 /* CoreDataDA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F6C04D1FC9E7EF00D90828 /* CoreDataDA.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		39F6C01F1FC9359600D90828 /* RepoDetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailsCell.swift; sourceTree = "<group>"; };
 		39F6C0211FC9C53C00D90828 /* HeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewCell.swift; sourceTree = "<group>"; };
 		39F6C0221FC9C53C00D90828 /* HeaderViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderViewCell.xib; sourceTree = "<group>"; };
+		39F6C04A1FC9E46500D90828 /* Git-it.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Git-it.xcdatamodel"; sourceTree = "<group>"; };
+		39F6C04D1FC9E7EF00D90828 /* CoreDataDA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataDA.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,12 +76,14 @@
 		39F6BFF61FC8363A00D90828 /* Git-it */ = {
 			isa = PBXGroup;
 			children = (
+				39F6C04C1FC9E7D300D90828 /* DataAccess */,
 				39F6C01A1FC8B44F00D90828 /* Views */,
 				39F6C0131FC8712600D90828 /* ViewControllers */,
 				39F6C0101FC86E3000D90828 /* Utils */,
 				39F6C00D1FC8468600D90828 /* Model */,
 				39F6C00A1FC845B800D90828 /* Networking */,
 				39F6C0091FC8365300D90828 /* Supporting Files */,
+				39F6C0491FC9E46500D90828 /* Git-it.xcdatamodeld */,
 			);
 			path = "Git-it";
 			sourceTree = "<group>";
@@ -137,6 +143,14 @@
 				39F6C0221FC9C53C00D90828 /* HeaderViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		39F6C04C1FC9E7D300D90828 /* DataAccess */ = {
+			isa = PBXGroup;
+			children = (
+				39F6C04D1FC9E7EF00D90828 /* CoreDataDA.swift */,
+			);
+			path = DataAccess;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,10 +229,12 @@
 				39F6C0201FC9359600D90828 /* RepoDetailsCell.swift in Sources */,
 				39F6C0121FC86E4C00D90828 /* Notifier.swift in Sources */,
 				39F6C0231FC9C53C00D90828 /* HeaderViewCell.swift in Sources */,
+				39F6C04E1FC9E7EF00D90828 /* CoreDataDA.swift in Sources */,
 				39F6C0191FC8B39100D90828 /* ImageViewExtension.swift in Sources */,
 				39F6BFFA1FC8363A00D90828 /* LoginVC.swift in Sources */,
 				39F6C00F1FC846B300D90828 /* GitHubUser.swift in Sources */,
 				39F6C01E1FC91EEE00D90828 /* GitUserRepos.swift in Sources */,
+				39F6C04B1FC9E46500D90828 /* Git-it.xcdatamodeld in Sources */,
 				39F6C0171FC8799300D90828 /* ProfileTVC.swift in Sources */,
 				39F6BFF81FC8363A00D90828 /* AppDelegate.swift in Sources */,
 				39F6C00C1FC845ED00D90828 /* NetworkQueries.swift in Sources */,
@@ -361,7 +377,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT5L554J64;
 				INFOPLIST_FILE = "$(SRCROOT)/Git-it/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sayantanchakraborty.Git-it";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -377,7 +393,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YT5L554J64;
 				INFOPLIST_FILE = "$(SRCROOT)/Git-it/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sayantanchakraborty.Git-it";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -408,6 +424,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		39F6C0491FC9E46500D90828 /* Git-it.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				39F6C04A1FC9E46500D90828 /* Git-it.xcdatamodel */,
+			);
+			currentVersion = 39F6C04A1FC9E46500D90828 /* Git-it.xcdatamodel */;
+			path = "Git-it.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 39F6BFEC1FC8363A00D90828 /* Project object */;
 }
