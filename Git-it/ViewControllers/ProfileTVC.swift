@@ -15,7 +15,8 @@ class ProfileTVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Profile"
-        //doExtraSetup()
+        let btnShare = UIBarButtonItem(barButtonSystemItem:.action, target: self, action: #selector(btnShare_clicked))
+        self.navigationItem.rightBarButtonItem = btnShare
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -23,9 +24,10 @@ class ProfileTVC: UITableViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @objc func btnShare_clicked() {
+        let activityVC = UIActivityViewController(activityItems: ["https://github.com/\(gitUser?.login ?? "")"], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+        self.present(activityVC, animated: true, completion: nil)
     }
 
     
