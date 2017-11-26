@@ -44,7 +44,7 @@ class CoreDataDA {
         let managedContext = appDelegate.persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "GitUser")
-        fetchRequest.predicate = NSPredicate(format: "login == %@", username)
+        fetchRequest.predicate = NSPredicate(format: "login ==[c] %@", username)
         
         do {
             let records = try managedContext.fetch(fetchRequest)

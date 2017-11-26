@@ -10,6 +10,7 @@ import UIKit
 
 class LoginVC: UIViewController,Notifier {
     
+    @IBOutlet weak var activityindicator: UIActivityIndicatorView!
     @IBOutlet weak var txtUserName: UITextField!
     @IBOutlet weak var btnLogin: UIButton!
     var user:GitHubUser?
@@ -20,6 +21,7 @@ class LoginVC: UIViewController,Notifier {
         btnLogin.layer.cornerRadius = 5
         btnLogin.layer.borderWidth = 1
         txtUserName.becomeFirstResponder()
+        activityindicator.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(networkTypeChangedDashBoard), name: .networkChangedFlag, object: Network.reachability)
     }
     
@@ -47,10 +49,15 @@ class LoginVC: UIViewController,Notifier {
                 performSegue(withIdentifier: "showUserDetails", sender: nil)
             }
         }else{
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            activityindicator.isHidden = false
+            activityindicator.startAnimating()
             NetworkQueries().fetchGithubUser(searchTerm: txtUserName.text!) { (gitUser, error) in
                 guard error.isEmpty else{
                     self.displayAlert(title: "Error", message: error)
+                    DispatchQueue.main.async {
+                        self.activityindicator.stopAnimating()
+                        self.activityindicator.isHidden = true
+                    }
                     return
                 }
                 if let user = gitUser{
@@ -58,9 +65,12 @@ class LoginVC: UIViewController,Notifier {
                     CoreDataDA().save(gitUser: user, appDelegate: UIApplication.shared.delegate as! AppDelegate)
                     self.performSegue(withIdentifier: "showUserDetails", sender: nil)
                 }
-            }
-            DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                
+                DispatchQueue.main.async {
+                    self.activityindicator.stopAnimating()
+                    self.activityindicator.isHidden = true
+                }
+
             }
         }
     }
@@ -72,6 +82,10 @@ class LoginVC: UIViewController,Notifier {
             pTVC.gitUser = user
         }
     }
+    
+//    fileprivate toggleActivityIndicatorState(){
+//        //if
+//    }
     
     /// When network status chnages this will fire
     ///

@@ -42,9 +42,13 @@ class NetworkQueries {
                     DispatchQueue.main.async {
                         completion(self.user, self.errorMessage)
                     }
+                }else{
+                    completion(nil,"No user found")
                 }
             })
             dataTask?.resume()
+        }else{
+            completion(nil,"No user")
         }
     }
     

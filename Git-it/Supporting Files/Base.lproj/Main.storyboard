@@ -52,12 +52,17 @@
                                     <action selector="btnGetStarted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KK9-Yd-NV7"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="yRV-o4-wiF">
+                                <rect key="frame" x="141" y="222" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.018130741128610794" green="0.15512327224779016" blue="0.18670685275431476" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="QxL-3B-c8k"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="activityindicator" destination="yRV-o4-wiF" id="P5n-Ot-z0z"/>
                         <outlet property="btnLogin" destination="Xse-fi-Dnj" id="ODJ-WK-tjg"/>
                         <outlet property="txtUserName" destination="mvi-B8-Soj" id="IIf-Jh-PBd"/>
                         <segue destination="GMu-S7-XBZ" kind="show" identifier="showUserDetails" id="pQT-cC-paC"/>
