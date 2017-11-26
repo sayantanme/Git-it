@@ -24,6 +24,7 @@ class ProfileTVC: UITableViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    /// opens up the Activity Controller to share the Github url link with other apps
     @objc func btnShare_clicked() {
         let activityVC = UIActivityViewController(activityItems: ["https://github.com/\(gitUser?.login ?? "")"], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view

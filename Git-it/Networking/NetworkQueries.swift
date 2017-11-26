@@ -22,6 +22,7 @@ class NetworkQueries {
     let urlSession = URLSession(configuration: .default)
     var dataTask:URLSessionDataTask?
     
+    ///fetches git user over the network. using URLSession
     func fetchGithubUser(searchTerm: String, completion: @escaping QueryResult) {
         
         dataTask?.cancel()
@@ -47,6 +48,7 @@ class NetworkQueries {
         }
     }
     
+    ///Parses the pulled data to form a Git user
     fileprivate func updateSearchResults(_ data: Data) {
         var response: [String:Any]?
         do {

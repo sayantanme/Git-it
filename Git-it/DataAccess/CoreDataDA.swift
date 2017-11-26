@@ -11,6 +11,7 @@ import CoreData
 
 class CoreDataDA {
     
+    ///saves the Git User to the table
     func save(gitUser: GitHubUser, appDelegate: AppDelegate) {
         
         let managedContext = appDelegate.persistentContainer.viewContext
@@ -38,6 +39,7 @@ class CoreDataDA {
         }
     }
     
+    ///fetches the git user from the database
     func getGitUser(username:String,appDelegate: AppDelegate) -> GitHubUser?{
         let managedContext = appDelegate.persistentContainer.viewContext
         

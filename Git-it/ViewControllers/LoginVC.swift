@@ -13,12 +13,14 @@ class LoginVC: UIViewController,Notifier {
     @IBOutlet weak var txtUserName: UITextField!
     @IBOutlet weak var btnLogin: UIButton!
     var user:GitHubUser?
+    var isConnectedToNetwork = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnLogin.layer.cornerRadius = 5
         btnLogin.layer.borderWidth = 1
         txtUserName.becomeFirstResponder()
+        NotificationCenter.default.addObserver(self, selector: #selector(networkTypeChangedDashBoard), name: .networkChangedFlag, object: Network.reachability)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,9 +37,17 @@ class LoginVC: UIViewController,Notifier {
             return
         }
         
-        let gitHubUser = CoreDataDA().getGitUser(username: txtUserName.text!, appDelegate: UIApplication.shared.delegate as! AppDelegate)
-        
-        if gitHubUser == nil{
+        //Checks the network is the app is connected to the internet if it is, data is fetched over the network else from coredata
+        if(!isConnectedToNetwork){
+            let gitHubUser = CoreDataDA().getGitUser(username: txtUserName.text!, appDelegate: UIApplication.shared.delegate as! AppDelegate)
+            if gitHubUser == nil{
+                self.displayAlert(title: "Info", message: "App is offline and no user present in database")
+            }else{
+                self.user = gitHubUser
+                performSegue(withIdentifier: "showUserDetails", sender: nil)
+            }
+        }else{
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkQueries().fetchGithubUser(searchTerm: txtUserName.text!) { (gitUser, error) in
                 guard error.isEmpty else{
                     self.displayAlert(title: "Error", message: error)
@@ -49,16 +59,32 @@ class LoginVC: UIViewController,Notifier {
                     self.performSegue(withIdentifier: "showUserDetails", sender: nil)
                 }
             }
-        }else{
-            self.user = gitHubUser
-            performSegue(withIdentifier: "showUserDetails", sender: nil)
+            DispatchQueue.main.async {
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
         }
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is ProfileTVC {
             let pTVC = segue.destination as! ProfileTVC
             pTVC.gitUser = user
+        }
+    }
+    
+    /// When network status chnages this will fire
+    ///
+    /// - Parameter notification: notification object
+    @objc func networkTypeChangedDashBoard(_ notification: NSNotification) {
+        guard let status = Network.reachability?.status else { return }
+        switch status {
+        case .unreachable:
+            isConnectedToNetwork = false
+        case .wifi:
+            isConnectedToNetwork = true
+        case .wwan:
+            isConnectedToNetwork = true
         }
     }
 }

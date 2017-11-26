@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Documents Directory: \(documentsPath)")
             }
         #endif
+        self.setUpNetworkReachability()
         return true
     }
 
@@ -89,6 +90,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    //MARK: - Reachability method
+    fileprivate func setUpNetworkReachability(){
+        do {
+            Network.reachability = try Reachability(hostname: "www.google.com")
+            do {
+                try Network.reachability?.start()
+            } catch let error as Network.Error {
+                print(error)
+            } catch {
+                print(error)
+            }
+        } catch {
+            print(error)
         }
     }
 
